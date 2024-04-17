@@ -1,5 +1,6 @@
 import os
 import string
+import hashlib
 
 
 def clear_screen():
@@ -42,25 +43,34 @@ def generate_caesar_decryption_key(shift):
   return 26 - shift
 
 
+def hash_text(text):
+  # Hash the text using the SHA-256 algorithm
+  return hashlib.sha256(text.encode()).hexdigest()
+
+
 def main():
   clear_screen()
 
   while True:
+    print("Choose an option:")
     print("1. Encrypt")
     print("2. Decrypt")
-    choice = input("Choose an option: ")
-
-    clear_screen()
-
-    text = input("Enter the text you want to process (type 'exit' to quit): ")
-    if text.lower() == 'exit':
-      break
+    print("3. Hash")
+    print("4. Exit")
+    choice = input("Enter your choice: ")
 
     clear_screen()
 
     if choice == '1':
-      cipher_choice = input(
-          "Choose a cipher (1: Reverse, 2: Caesar, 3: Atbash): ")
+      text = input("Enter the text you want to encrypt: ")
+
+      clear_screen()
+
+      print("Choose a cipher:")
+      print("1: Reverse")
+      print("2: Caesar")
+      print("3: Atbash")
+      cipher_choice = input("Enter your choice: ")
 
       clear_screen()
 
@@ -79,8 +89,15 @@ def main():
         print("Invalid choice")
 
     elif choice == '2':
-      cipher_choice = input(
-          "Choose a cipher (1: Reverse, 2: Caesar, 3: Atbash): ")
+      text = input("Enter the text you want to decrypt: ")
+
+      clear_screen()
+
+      print("Choose a cipher:")
+      print("1: Reverse")
+      print("2: Caesar")
+      print("3: Atbash")
+      cipher_choice = input("Enter your choice: ")
 
       clear_screen()
 
@@ -98,10 +115,18 @@ def main():
       else:
         print("Invalid choice")
 
-    else:
-      print("Invalid option")
+    elif choice == '3':
+      text = input("Enter the text you want to hash: ")
+      hashed_text = hash_text(text)
+      print("Hashed text:", hashed_text)
 
-    input("\nPress Enter to continue...")
+    elif choice == '4':
+      break
+
+    else:
+      print("Invalid choice")
+
+    input("\nPress Enter to go back to main menu")
     clear_screen()
 
 
