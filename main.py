@@ -130,7 +130,7 @@ def main():
 
       elif cipher_choice == '2':
         shift = int(input("Enter the shift for the Caesar cipher (0-25): "))
-        decrypted_text = caesar_cipher(text, shift)
+        decrypted_text = caesar_cipher(text, -1 * shift)
         print("Decrypted text:", decrypted_text)
 
       elif cipher_choice == '3':
