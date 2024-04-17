@@ -1,11 +1,18 @@
 import os
 import string
+import random
 import hashlib
 
 
 def clear_screen():
   # Clear screen depending on the operating system
   os.system('cls' if os.name == 'nt' else 'clear')
+
+
+def hash_text(text):
+  # Hash the text using SHA-256
+  hash_object = hashlib.sha256(text.encode())
+  return hash_object.hexdigest()
 
 
 def reverse_cipher(text):
@@ -39,13 +46,20 @@ def atbash_cipher(text):
   return encrypted_text
 
 
-def generate_caesar_decryption_key(shift):
-  return 26 - shift
+def homebrew_cipher(text):
+  encrypted_text = ""
+  for i, char in enumerate(text):
+    encrypted_text += char + random.choices(string.ascii_letters, k=1)[0]
+  return encrypted_text
 
 
-def hash_text(text):
-  # Hash the text using the SHA-256 algorithm
-  return hashlib.sha256(text.encode()).hexdigest()
+def homebrew_decipher(text):
+  decrypted_text = ""
+  i = 0
+  while i < len(text):
+    decrypted_text += text[i]
+    i += 2  # Skip the index added during encryption
+  return decrypted_text
 
 
 def main():
@@ -70,6 +84,7 @@ def main():
       print("1: Reverse")
       print("2: Caesar")
       print("3: Atbash")
+      print("4: Homebrew")
       cipher_choice = input("Enter your choice: ")
 
       clear_screen()
@@ -77,14 +92,21 @@ def main():
       if cipher_choice == '1':
         encrypted_text = reverse_cipher(text)
         print("Encrypted text:", encrypted_text)
+
       elif cipher_choice == '2':
         shift = int(input("Enter the shift for the Caesar cipher (0-25): "))
         encrypted_text = caesar_cipher(text, shift)
         print("Encrypted text:", encrypted_text)
-        print("Decryption key:", generate_caesar_decryption_key(shift))
+        print("Decryption key:", shift)
+
       elif cipher_choice == '3':
         encrypted_text = atbash_cipher(text)
         print("Encrypted text:", encrypted_text)
+
+      elif cipher_choice == '4':
+        encrypted_text = homebrew_cipher(text)
+        print("Encrypted text:", encrypted_text)
+
       else:
         print("Invalid choice")
 
@@ -97,6 +119,7 @@ def main():
       print("1: Reverse")
       print("2: Caesar")
       print("3: Atbash")
+      print("4: Homebrew")
       cipher_choice = input("Enter your choice: ")
 
       clear_screen()
@@ -104,14 +127,20 @@ def main():
       if cipher_choice == '1':
         decrypted_text = reverse_cipher(text)
         print("Decrypted text:", decrypted_text)
+
       elif cipher_choice == '2':
         shift = int(input("Enter the shift for the Caesar cipher (0-25): "))
-        decrypted_text = caesar_cipher(text,
-                                       generate_caesar_decryption_key(shift))
+        decrypted_text = caesar_cipher(text, shift)
         print("Decrypted text:", decrypted_text)
+
       elif cipher_choice == '3':
         decrypted_text = atbash_cipher(text)
         print("Decrypted text:", decrypted_text)
+
+      elif cipher_choice == '4':
+        decrypted_text = homebrew_decipher(text)
+        print("Decrypted text:", decrypted_text)
+
       else:
         print("Invalid choice")
 
