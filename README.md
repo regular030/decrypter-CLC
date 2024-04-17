@@ -9,3 +9,5 @@ Hash text VIA sha256
 Encryption and Decryption can be done via Reverse, Caesar, Atbash, Homebrew
 
 Homebrew puts random letters between each letter of the original word 
+
+The presentation can be found at - https://www.canva.com/design/DAGChcYawOU/ckpOWeiB42rOZz4D-7nhMw/view?utm_content=DAGChcYawOU&utm_campaign=designshare&utm_medium=link&utm_source=editor
